@@ -20,12 +20,28 @@ errors: {}
 this.onChange = this.onChange.bind(this);
 
   }
+
+  onSubmit(e){
+e.preventDefault();
+const newUser = {
+    username: this.state.username,
+    name: this.state.name,
+    email: this.state.email,
+    password: this.state.password,
+    confirmpassword: this.state.confirmpassword
+}
+
+this.props.createdNewUser(newUser, this.props.history)
+  }
  
   
   onChange(e){
 
     this.setState({[e.target.name]:e.target.value})
 }
+
+
+
     render() {
     return (
         <div className="register">
@@ -64,4 +80,14 @@ this.onChange = this.onChange.bind(this);
     )
   }
 }
-export default connect(null, {createdNewUser}) (Register);
+
+Register.propTypes = {
+    createdNewUser: PropTypes.func.isRequired,
+    errors: PropTypes.object.isRequired
+}
+
+const mapStateToProps = state => ({
+errors: state.errors
+
+});
+export default connect(mapStateToProps, {createdNewUser}) (Register);

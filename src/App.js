@@ -9,6 +9,8 @@ import { BrowserRouter as Router, Route} from 'react-router-dom';
 import Create from './components/Create';
 import { Provider } from 'react-redux';
 import store from "./Store";
+import Landing from './components/Landing';
+import Login from './usermanagement/Login';
 
 class App extends Component {
   render() {
@@ -19,9 +21,24 @@ class App extends Component {
       <div className="App">
         
         <Header />
+
+{
+
+  //public routes
+}
+<Route exact path="/" component={Landing} />
+<Route exact path="/register" component={Register} />
+<Route exact path="/login" component={Login}/>
+{
+
+//privat routes
+
+}
+
+
         <Route exact path="/create" component={Create} />
         <Route exact path="/dashboard" component={Dashboard} />
-        <Route exact path="/register" component={Register} />
+        
        
         </div> 
          </Router>

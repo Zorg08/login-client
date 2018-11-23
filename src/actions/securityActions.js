@@ -1,25 +1,24 @@
+
 import axios from 'axios';
 import { GET_ERRORS } from './types';
 
+
 export const createNewUser = (newUser, history) => async dispatch => {
-
-
-    try{
-await axios.post("/rest/user/create", newUser);
+try{
+const res = await axios.post("/rest/user/create", newUser);
 history.push("/login");
 dispatch({
 type: GET_ERRORS,
 payload: {}
 
-
 });
-
-    }catch(error){
-            dispatch({
+} catch (err) {
+            dispatch ({
 type: GET_ERRORS,
-payload: error.response.data
+payload: err.res.data
 
-            })
+            });
 
     }
-}
+};
+

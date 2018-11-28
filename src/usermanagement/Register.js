@@ -10,10 +10,10 @@ constructor(){
 super();
 this.state = {
 username: "",
-name: "",
 email: "",
 password: "",
 confirmpassword: "",
+authority: "USER",
 errors: {}
 };
 
@@ -29,15 +29,17 @@ this.onSubmit = this.onSubmit.bind(this);
       }
   }
 
-  onSubmit(e){
+  
+  
+onSubmit(e){
 e.preventDefault();
 
 const newUser = {
     username: this.state.username,
-    name: this.state.name,
     email: this.state.email,
     password: this.state.password,
-    confirmpassword: this.state.confirmpassword
+    confirmpassword: this.state.confirmpassword,
+    authority: this.state.authority
 }
 
 this.props.createdNewUser(newUser, this.props.history)
@@ -63,7 +65,7 @@ this.props.createdNewUser(newUser, this.props.history)
                     <form onSubmit= {this.onSubmit}>
 
                         <div className="form-group">
-                           
+                    
                             <input type="text" 
                             className={classnames("form-control form-control-lg", {"is-invalid": errors.username})} placeholder="Username" name="username"
                                 value={this.state.username} onChange={this.onChange} />
@@ -75,16 +77,7 @@ this.props.createdNewUser(newUser, this.props.history)
                         </div>
 
                         <div className="form-group">
-                                <input type="text" className={classnames("form-control form-control-lg", { "is-invalid": errors.name })} placeholder="Name" name="name"
-                                value={this.state.name} onChange={this.onChange}  />
-
-                                {
-                                    errors.name && (<div className="invalid-feedback">{errors.name}</div>)
-
-                                }
-                        </div>
-                        <div className="form-group">
-                                <input type="email" className={classnames("form-control form-control-lg", { "is-invalid": errors.email })} placeholder="Email Address" name="email" value={this.state.email} onChange={this.onChange} />
+                                <input type="email" className={classnames("form-control form-control-lg", { "is-invalid": errors.email })} placeholder="Email" name="email" value={this.state.email} onChange={this.onChange} />
                                 {
                                     errors.email && (<div className="invalid-feedback">{errors.email}</div>)
 
@@ -117,11 +110,13 @@ this.props.createdNewUser(newUser, this.props.history)
 
 Register.propTypes = {
     createdNewUser: PropTypes.func.isRequired,
-    errors: PropTypes.object.isRequired
+    errors: PropTypes.object.isRequired,
+    security: PropTypes.object.isRequired
 }
 
 const mapStateToProps = state => ({
-errors: state.errors
+errors: state.errors,
+security: state.security
 
 });
 export default connect(mapStateToProps, { createNewUser}) (Register);

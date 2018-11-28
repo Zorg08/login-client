@@ -10,7 +10,7 @@ import jwt_decode from 'jwt-decode';
 
 export const createNewUser = (newUser, history) => async dispatch => {
 try{
-const res = await axios.post("/rest/user/create", newUser);
+await axios.post("/api/user/create", newUser);
 history.push("/login");
 dispatch({
 type: GET_ERRORS,
@@ -31,7 +31,7 @@ export const login = LoginRequest => async dispatch => {
 try {
   
     //fetch user from login req
-    const res = await axios.post("/rest/user/login", LoginRequest);
+    const res = await axios.post("/api/user/login", LoginRequest);
 
   //extract token from res.data
     const {token} = res.data;
@@ -57,5 +57,15 @@ dispatch ({
     })
     
 }
+};
+
+export const logout = () => dispatch => {
+localStorage.removeItem("jwtToken")
+SetJwt(false)
+dispatch({
+    type: SET_CURRENT_USER,
+    payload: {}
+
+});
 }
 

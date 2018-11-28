@@ -20,6 +20,11 @@ class Users extends Component {
                               <i className="fa fa-flag-checkered pr-1"> Project Board </i>
                           </li>
                       </a>
+                      <a href="">
+                          <li className="list-group-item create">
+                              <i className="fa fa-plus-circle pr-1"> Create User </i>
+                          </li>
+                      </a>
                       <a href="#">
                           <li className="list-group-item update">
                               <i className="fa fa-edit pr-1"> Update user Info</i>

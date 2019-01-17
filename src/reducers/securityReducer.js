@@ -1,11 +1,12 @@
 import { SET_CURRENT_USER } from './../actions/types';
 
 const initialState = {
+validToken: false,
+    user: {}
+    
+};
 
-    user: {},
-    validToken: false
-}
-
+// we dont want the token just be valid
 const booleanPayload =(payload)=> {
     if(payload){
         return true

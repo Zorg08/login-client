@@ -6,7 +6,6 @@ import Header from './components/Header';
 import Register from './usermanagement/Register';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter as Router, Route, Switch} from 'react-router-dom';
-import Create from './components/Create';
 import { Provider } from 'react-redux';
 import store from "./Store";
 import Landing from './components/Landing';

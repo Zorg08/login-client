@@ -30,7 +30,7 @@ if(this.props.security.validToken){
 }
 
 onChange(e) {
-    this.setState({[e.target.name]: e.target.value})
+    this.setState({[e.target.name]:e.target.value})
 }
 
 //will get pushed to dashboard if authenticated

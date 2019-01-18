@@ -18,7 +18,8 @@ import { SecureRoute } from './securityUtils/SecureRoute';
 
 
 //checks if user has a token
-const jwtToken = localStorage.jwtToken
+const jwtToken = localStorage.jwtToken;
+
 if(jwtToken){
   SetJwt(jwtToken)
   const decoded_token = jwt_decode(jwtToken);

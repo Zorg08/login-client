@@ -7,7 +7,7 @@ validToken: false,
 };
 
 // we dont want the token just be valid
-const booleanPayload =(payload)=> {
+const booleanPayload = (payload) => {
     if(payload){
         return true
     }else {

@@ -12,7 +12,7 @@ this.state = {
 username: "",
 email: "",
 password: "",
-//confirmpassword: "",
+confirmpassword: "",
 errors: {}
 };
 
@@ -22,11 +22,13 @@ this.onSubmit = this.onSubmit.bind(this);
   }
 
 //lifecycle allows to setstate
+
   componentWillReceiveProps(nextProps){
       if(nextProps.errors){
           this.setState({ errors: nextProps.errors });
       }
   }
+  
 
   
   
@@ -37,7 +39,7 @@ const newUser = {
     username: this.state.username,
     email: this.state.email,
     password: this.state.password,
-    //confirmpassword: this.state.confirmpassword,
+    confirmpassword: this.state.confirmpassword,
     //authority: this.state.authority
 }
 
@@ -49,7 +51,6 @@ this.props.createNewUser(newUser, this.props.history);
 
     this.setState({[e.target.name]:e.target.value})
 }
-
 
 
     render() {
@@ -94,13 +95,14 @@ this.props.createNewUser(newUser, this.props.history);
                                 }
                         </div>
                         <div className="form-group">
-                                <input type="password" className={classnames("form-control form-control-lg", { "is-invalid": errors.confirmpassword})} 
-                                placeholder="Confirm Password" name="confirmpassword"  value={this.state.confirmpassword} onChange={this.onChange}/>
-                                {
-                                    errors.confirmpassword && (<div className="invalid-feedback">{errors.confirmpassword}</div>)
+                              <input type="password" className={classnames("form-control form-control-lg", { "is-invalid": errors.confirmpassword})}
+                                  placeholder="Confirm Password" name="confirmpassword" value={this.state.confirmpassword} onChange={this.onChange}/>
+                                    {
+                                       errors.confirmpassword && (<div className="invalid-feedback">{errors.confirmpassword}</div>)
+                                       }
+                                      </div>
 
-                                }
-                        </div>
+                        
                         <input type="submit" className="btn btn-info btn-block mt-4" />
                     </form>
                 </div>
@@ -116,6 +118,8 @@ Register.propTypes = {
     errors: PropTypes.object.isRequired,
     security: PropTypes.object.isRequired
 };
+
+
 
 const mapStateToProps = state => ({
 errors: state.errors,

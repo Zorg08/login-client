@@ -11,7 +11,7 @@ import jwt_decode from 'jwt-decode';
 export const createNewUser = (newUser, history) => async dispatch => {
 try{
     //await behøver vi ikke .then den forcer koden til at vente indtil promise er fullfilled
-await axios.post("/login/register", newUser);
+await axios.post("http://localhost:8462/login/register", newUser);
 history.push("/login");
 dispatch({
 type: GET_ERRORS,
@@ -32,7 +32,7 @@ export const login = LoginRequest => async dispatch => {
 try {
   
     //fetch user from login req
-    const res = await axios.post("/login/token", LoginRequest);
+    const res = await axios.post("http://localhost:8462/login/token", LoginRequest);
 
   //extract token from res.data
     const { token } = res.data;
@@ -49,7 +49,7 @@ dispatch ({
 
     type: SET_CURRENT_USER,
     payload: decoded
-})    
+});    
 
 } catch (err) {
     dispatch({

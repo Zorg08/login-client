@@ -7,20 +7,21 @@ import {
 import SetJwt from '../securityUtils/SetJwt';
 import jwt_decode from 'jwt-decode';
 
-
+//async keyword generere Promise
 export const createNewUser = (newUser, history) => async dispatch => {
 try{
-await axios.post("/api/user/create", newUser);
+    //await behøver vi ikke .then den forcer koden til at vente indtil promise er fullfilled
+await axios.post("http://localhost:8462/login/register", newUser);
 history.push("/login");
 dispatch({
 type: GET_ERRORS,
 payload: {}
 
 });
-} catch (err) {
+} catch (error) {
             dispatch ({
 type: GET_ERRORS,
-payload: err.res.data
+payload: error.res.data
 
             });
 
@@ -31,30 +32,30 @@ export const login = LoginRequest => async dispatch => {
 try {
   
     //fetch user from login req
-    const res = await axios.post("/api/user/login", LoginRequest);
+    const res = await axios.post("http://localhost:8462/login/token", LoginRequest);
 
   //extract token from res.data
-    const {token} = res.data;
+    const { token } = res.data;
 
     //store token in local storage
-    localStorage.setItem('jwtToken', token);
+    localStorage.setItem("jwtToken", token);
 
     //set token in header
     SetJwt(token);
 //decode token
-    const decode = jwt_decode(token);
+    const decoded = jwt_decode(token);
 //dispatch to our securityReducer
 dispatch ({
 
     type: SET_CURRENT_USER,
-    payload: decode
-})    
+    payload: decoded
+});    
 
 } catch (err) {
     dispatch({
         type: GET_ERRORS,
-        payload: err.res.data
-    })
+        payload: err.response.data
+    });
     
 }
 };

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import Users from './Users';
-import Create from './Create';
+
 
 class Dashboard extends Component {
   render() {

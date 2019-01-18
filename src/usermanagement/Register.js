@@ -13,7 +13,6 @@ username: "",
 email: "",
 password: "",
 confirmpassword: "",
-authority: "USER",
 errors: {}
 };
 
@@ -22,12 +21,14 @@ this.onSubmit = this.onSubmit.bind(this);
 
   }
 
+//lifecycle allows to setstate
 
   componentWillReceiveProps(nextProps){
       if(nextProps.errors){
           this.setState({ errors: nextProps.errors });
       }
   }
+  
 
   
   
@@ -39,10 +40,10 @@ const newUser = {
     email: this.state.email,
     password: this.state.password,
     confirmpassword: this.state.confirmpassword,
-    authority: this.state.authority
+    //authority: this.state.authority
 }
 
-this.props.createdNewUser(newUser, this.props.history)
+this.props.createNewUser(newUser, this.props.history);
   }
  
   
@@ -50,7 +51,6 @@ this.props.createdNewUser(newUser, this.props.history)
 
     this.setState({[e.target.name]:e.target.value})
 }
-
 
 
     render() {
@@ -67,7 +67,8 @@ this.props.createdNewUser(newUser, this.props.history)
                         <div className="form-group">
                     
                             <input type="text" 
-                            className={classnames("form-control form-control-lg", {"is-invalid": errors.username})} placeholder="Username" name="username"
+                            className={classnames("form-control form-control-lg", {"is-invalid": errors.username})} 
+                            placeholder="Username" name="username"
                                 value={this.state.username} onChange={this.onChange} />
 
                                 {
@@ -77,14 +78,16 @@ this.props.createdNewUser(newUser, this.props.history)
                         </div>
 
                         <div className="form-group">
-                                <input type="email" className={classnames("form-control form-control-lg", { "is-invalid": errors.email })} placeholder="Email" name="email" value={this.state.email} onChange={this.onChange} />
+                                <input type="email" className={classnames("form-control form-control-lg", { "is-invalid": errors.email })} 
+                                placeholder="Email" name="email" value={this.state.email} onChange={this.onChange} />
                                 {
                                     errors.email && (<div className="invalid-feedback">{errors.email}</div>)
 
                                 }
                         </div>
                         <div className="form-group">
-                                <input type="password" className={classnames("form-control form-control-lg", { "is-invalid": errors.password })} placeholder="Password" name="password"  value={this.state.password} onChange={this.onChange}/>
+                                <input type="password" className={classnames("form-control form-control-lg", { "is-invalid": errors.password })} 
+                                placeholder="Password" name="password"  value={this.state.password} onChange={this.onChange}/>
 
                                 {
                                     errors.password && (<div className="invalid-feedback">{errors.password}</div>)
@@ -92,27 +95,31 @@ this.props.createdNewUser(newUser, this.props.history)
                                 }
                         </div>
                         <div className="form-group">
-                                <input type="password" className={classnames("form-control form-control-lg", { "is-invalid": errors.confirmpassword})} placeholder="Confirm Password" name="confirmpassword"  value={this.state.confirmpassword} onChange={this.onChange}/>
-                                {
-                                    errors.confirmpassword && (<div className="invalid-feedback">{errors.confirmpassword}</div>)
+                              <input type="password" className={classnames("form-control form-control-lg", { "is-invalid": errors.confirmpassword})}
+                                  placeholder="Confirm Password" name="confirmpassword" value={this.state.confirmpassword} onChange={this.onChange}/>
+                                    {
+                                       errors.confirmpassword && (<div className="invalid-feedback">{errors.confirmpassword}</div>)
+                                       }
+                                      </div>
 
-                                }
-                        </div>
+                        
                         <input type="submit" className="btn btn-info btn-block mt-4" />
                     </form>
                 </div>
             </div>
         </div>
     </div>
-    )
+    );
   }
 }
 
 Register.propTypes = {
-    createdNewUser: PropTypes.func.isRequired,
+    createNewUser: PropTypes.func.isRequired,
     errors: PropTypes.object.isRequired,
     security: PropTypes.object.isRequired
-}
+};
+
+
 
 const mapStateToProps = state => ({
 errors: state.errors,

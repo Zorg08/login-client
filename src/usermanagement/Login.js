@@ -30,14 +30,14 @@ if(this.props.security.validToken){
 }
 
 onChange(e) {
-    this.setState({[e.target.name]: e.target.value})
+    this.setState({[e.target.name]:e.target.value})
 }
 
 //will get pushed to dashboard if authenticated
 componentWillReceiveProps(nextProps){
 
     if(nextProps.security.validToken){
-        this.props.history.push("dashboard");
+        this.props.history.push("/dashboard");
     }
     if(nextProps.errors){
         this.setState({errors: nextProps.errors});
@@ -108,6 +108,7 @@ onSubmit(e) {
 }
 
 Login.propTypes = {
+    
     login: PropTypes.func.isRequired,
     errors: PropTypes.object.isRequired,
     security: PropTypes.object.isRequired
